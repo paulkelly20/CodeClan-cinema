@@ -40,14 +40,14 @@ screening1 = Screening.new(
 screening1.save()
 
 screening2 = Screening.new(
-  "screening_time" => "23:00",
+  "screening_time" => "22:00",
   "film_id" => film1.id
 )
 
 screening2.save()
 
 screening3 = Screening.new(
-  "screening_time" => "21:00",
+  "screening_time" => "23:00",
   "film_id" => film2.id
 )
 

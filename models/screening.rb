@@ -33,13 +33,39 @@ class Screening
    SqlRunner.run(sql, values)
  end
 
-  def find_ticket_count_from_screenings()
-    sql = "SELECT screenings.*, tickets.* FROM screenings INNER JOIN tickets ON screenings.id = tickets.screening_id WHERE film_id = $1 AND screenings.id = $2"
-    values = [@film_id,@id]
-    tickets = SqlRunner.run(sql, values)
-    result = Ticket.map_tickets(tickets)
-    result.count
+  # def find_ticket_count_from_screenings()
+  #   sql = "SELECT screenings.*, tickets.* FROM screenings INNER JOIN tickets ON screenings.id = tickets.screening_id WHERE film_id = $1 AND screenings.id = $2"
+  #   values = [@film_id,@id]
+  #   tickets = SqlRunner.run(sql, values)
+  #   result = Ticket.map_tickets(tickets)
+  #   result.count
+  #
+  # end
 
-  end
+
+    # def self.find_ticket_count_from_screenings()
+    #   sql = "SELECT screenings.* FROM screenings INNER JOIN tickets ON screenings.id = tickets.screening_id ;"
+    #   values = []
+    #   screening_data = SqlRunner.run(sql, values)
+    #   result = Screening.map_screenings(screening_data)
+    #   result[8]
+    #
+    # end
+
+
+
+     def self.find_ticket_count_from_screenings()
+       sql = "SELECT screenings.screening_time, COUNT(screenings.screening_time) FROM screenings INNER JOIN tickets ON screenings.id = tickets.screening_id GROUP BY screenings.screening_time ORDER BY screening_time;"
+       values = []
+       screening_data = SqlRunner.run(sql, values)[0]
+
+    
+     end
+
+    def self.map_screenings(screening_data)
+      screening_data.map{|screening_hash| Screening.new(screening_hash)}
+    end
+
+
 
 end
