@@ -55,11 +55,11 @@ class Screening
 
 
      def self.find_ticket_count_from_screenings()
-       sql = "SELECT screenings.screening_time, COUNT(screenings.screening_time) FROM screenings INNER JOIN tickets ON screenings.id = tickets.screening_id GROUP BY screenings.screening_time ORDER BY screening_time;"
+       sql = "SELECT screenings.screening_time, screenings.film_id, count(screenings.screening_time) FROM screenings INNER JOIN tickets ON screenings.id = tickets.screening_id GROUP BY screening_time, film_id ORDER BY screening_time"
        values = []
        screening_data = SqlRunner.run(sql, values)[0]
 
-    
+
      end
 
     def self.map_screenings(screening_data)
