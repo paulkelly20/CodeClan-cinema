@@ -36,22 +36,22 @@ class Film
   end
 
   def self.delete_all()
-   sql = "DELETE FROM films"
-   values = []
-   SqlRunner.run(sql, values)
- end
+    sql = "DELETE FROM films"
+    values = []
+    SqlRunner.run(sql, values)
+  end
 
- def customers()
-   sql = "SELECT customers.*, films.*, tickets.*, screenings.* FROM films INNER JOIN screenings ON films.id = screenings.film_id INNER JOIN tickets ON screenings.id = tickets.screening_id INNER JOIN customers ON customers.id = tickets.customer_id  WHERE tickets.screening_id = $1;"
-   values = [@id]
-   films = SqlRunner.run(sql, values)
-   result = Customer.map_customers(films)
-   return result
-end
+  def customers()
+    sql = "SELECT customers.*, films.*, tickets.*, screenings.* FROM films INNER JOIN screenings ON films.id = screenings.film_id INNER JOIN tickets ON screenings.id = tickets.screening_id INNER JOIN customers ON customers.id = tickets.customer_id  WHERE tickets.screening_id = $1;"
+    values = [@id]
+    films = SqlRunner.run(sql, values)
+    result = Customer.map_customers(films)
+    return result
+  end
 
- def self.map_films(film_data)
-   film_data.map{|film_hash| Film.new(film_hash)}
- end
+  def self.map_films(film_data)
+    film_data.map{|film_hash| Film.new(film_hash)}
+  end
 
   def customers_count
     return customers.count

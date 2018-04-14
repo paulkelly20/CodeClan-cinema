@@ -35,20 +35,23 @@ film2.save()
 
 screening1 = Screening.new(
   "screening_time" => "21:00",
-  "film_id" => film1.id
+  "film_id" => film1.id,
+  "capacity" => 3
 )
 screening1.save()
 
 screening2 = Screening.new(
   "screening_time" => "22:00",
-  "film_id" => film1.id
+  "film_id" => film1.id,
+  "capacity" => 10
 )
 
 screening2.save()
 
 screening3 = Screening.new(
   "screening_time" => "23:00",
-  "film_id" => film2.id
+  "film_id" => film2.id,
+  "capacity" => 90
 )
 
 screening3.save()
@@ -116,10 +119,6 @@ tickets10 = Ticket.new(
   "screening_id" => screening3.id
 )
 tickets10.save()
-
-
-
-
 
 
 binding.pry

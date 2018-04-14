@@ -1,6 +1,7 @@
 require_relative("../db/sqlrunner.rb")
 require_relative("films.rb")
 require_relative("ticket.rb")
+require_relative("screening.rb")
 
 class Customer
   attr_reader :id
@@ -62,11 +63,12 @@ class Customer
     return @pocket.count
   end
 
-  def customer_purchases_film_ticket(film, ticket)
-    if @funds > film.price
-      @funds -= film.price
-      @pocket << ticket
-    else "Too poor"
+  def customer_purchases_film_ticket(film, ticket, screening)
+    if @funds > film.price && screening.capacity > 0
+      then @funds -= film.price
+          @pocket << ticket
+          screening.capacity -= 1
+    else "sorry no tickets"
     end
   end
 

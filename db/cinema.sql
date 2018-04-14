@@ -19,9 +19,10 @@ CREATE TABLE films (
 CREATE TABLE screenings (
   id SERIAL PRIMARY KEY,
   screening_time VARCHAR(255) ,
+  capacity INT,
   film_id INT REFERENCES films(id)
-
 );
+
 CREATE TABLE tickets (
   id SERIAL PRIMARY KEY,
   customer_id INT REFERENCES customers(id) ,
