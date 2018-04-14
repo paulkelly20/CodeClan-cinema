@@ -33,6 +33,13 @@ class Screening
    SqlRunner.run(sql, values)
  end
 
+  def find_ticket_count_from_screenings()
+    sql = "SELECT screenings.*, tickets.* FROM screenings INNER JOIN tickets ON screenings.id = tickets.screening_id WHERE film_id = $1 AND screenings.id = $2"
+    values = [@film_id,@id]
+    tickets = SqlRunner.run(sql, values)
+    result = Ticket.map_tickets(tickets)
+    result.count
 
+  end
 
 end
