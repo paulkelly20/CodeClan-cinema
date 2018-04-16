@@ -43,4 +43,13 @@ class Screening
     screening_data.map{|screening_hash| Screening.new(screening_hash)}
   end
 
+
+
+  # def find_screening()
+  #   sql = "  SELECT screenings.screening_time, screenings.film_id, count(screenings.screening_time) FROM screenings INNER JOIN tickets ON screenings.id = tickets.screening_id WHERE film_id = $1  GROUP BY screening_time, film_id ORDER BY count desc;"
+  #   values = [@film_id]
+  #   screening_data = SqlRunner.run(sql, values)[0]
+  #
+  # end
+
 end

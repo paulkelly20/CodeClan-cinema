@@ -4,10 +4,10 @@ require_relative('models/ticket.rb')
 require_relative('models/screening.rb')
 require('pry-byebug')
 
+Screening.delete_all()
 Ticket.delete_all()
 Customer.delete_all()
 Film.delete_all()
-Screening.delete_all()
 
 customer1 = Customer.new(
   "name" => "Paul Kelly",

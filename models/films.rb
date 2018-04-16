@@ -56,4 +56,16 @@ class Film
   def customers_count
     return customers.count
   end
+
+  def find_screening()
+    sql = "  SELECT screenings.screening_time, screenings.film_id, count(screenings.screening_time) FROM films INNER JOIN  screenings ON films.id = screenings.film_id INNER JOIN tickets ON screenings.id = tickets.screening_id  WHERE films.id = $1  GROUP BY screening_time, film_id ORDER BY count desc
+      ;"
+    values = [@id]
+    screening_data = SqlRunner.run(sql, values)[0]
+    # result = Screening.map_screenings(screening_data)
+
+
+
+  end
+
 end
